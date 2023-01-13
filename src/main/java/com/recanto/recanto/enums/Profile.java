@@ -1,4 +1,4 @@
-package com.recanto.recanto.domain.enums;
+package com.recanto.recanto.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.recanto.recanto.domain.enums;
+package com.recanto.recanto.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Situation {
-    ABERTO(0, "ABERTO"),VENCIDO(1, "VENCIDO"), FINALIZADO(2, "FINALIZADO");
+    ABERTO(0, "ABERTO"),PENDENTE(1, "PENDENTE"), FINALIZADO(2, "FINALIZADO");
 
     private final Integer code;
     private final String description;
