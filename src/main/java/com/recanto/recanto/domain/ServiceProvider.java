@@ -16,9 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,7 +29,7 @@ public class ServiceProvider  {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String titulo;
+    private String title;
     private String name;
     private String document;
     private String car;
@@ -40,9 +38,9 @@ public class ServiceProvider  {
     @Enumerated(EnumType.STRING)
     private Situation situation ;
 
-    public ServiceProvider(Integer id, String titulo, String name, String document, String description) {
+    public ServiceProvider(Integer id, String title, String name, String document, String description) {
         this.id = id;
-        this.titulo = titulo;
+        this.title = title;
         this.name = name;
         this.document = document;
         this.description = description;
