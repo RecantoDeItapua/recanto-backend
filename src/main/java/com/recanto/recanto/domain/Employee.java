@@ -1,5 +1,6 @@
 package com.recanto.recanto.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.recanto.recanto.enums.Profile;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -18,15 +19,16 @@ import java.util.List;
 @Setter
 public class Employee extends Person{
 
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<ServiceProvider> providers = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<Annoucements> annoucements = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<Reservation> reservations = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<Occurrences> occurrences = new ArrayList<>();
 
