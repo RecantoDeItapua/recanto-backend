@@ -19,38 +19,40 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
+@Getter
+@Setter
+
 public abstract class Person {
 
-    @Getter @Setter
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    protected UUID id;
 
-    @Getter @Setter
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
+
+
     protected String name;
 
-    @Getter @Setter
+
     @Column(unique = true)
     protected String cpf;
 
-    @Getter @Setter
+
     @Column(unique = true)
     protected String email;
 
-    @Getter @Setter
+
     protected String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PROFILES")
     protected Set<Integer> profiles = new HashSet<>();
 
-    @Getter @Setter
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dateCriation = LocalDate.now();
 
@@ -59,7 +61,16 @@ public abstract class Person {
         addProfiles(Profile.RESIDENT);
     }
 
-    public Person(UUID id, String name, String cpf, String email, String password) {
+    public Person(Integer id, String name, String cpf, String email, String password) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.cpf = cpf;
+        this.email = email;
+        this.password = password;
+
+
+
     }
 
 

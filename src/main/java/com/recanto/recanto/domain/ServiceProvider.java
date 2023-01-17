@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,14 +29,25 @@ import java.util.UUID;
 @Entity
 public class ServiceProvider  {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String titulo;
     private String name;
     private String document;
     private String car;
     private String description;
+
+    @Enumerated(EnumType.STRING)
     private Situation situation ;
+
+    public ServiceProvider(Integer id, String titulo, String name, String document, String description) {
+        this.id = id;
+        this.titulo = titulo;
+        this.name = name;
+        this.document = document;
+        this.description = description;
+    }
+
     private LocalDate dateOpen = LocalDate.now();
     private LocalDate dateFinish;
 
