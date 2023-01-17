@@ -10,4 +10,5 @@ public class RecantoApplication {
 		SpringApplication.run(RecantoApplication.class, args);
 	}
 
+
 }
