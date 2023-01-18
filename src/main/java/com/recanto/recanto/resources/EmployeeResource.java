@@ -1,7 +1,8 @@
 package com.recanto.recanto.resources;
 
-import com.recanto.recanto.domain.Employee;
+import com.recanto.recanto.domain.dtos.EmployeeDTO;
 import com.recanto.recanto.services.EmployeeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmployeeResource {
     @Autowired
     private EmployeeService service;
+    @Autowired
+    private ModelMapper mapper;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Employee> findById(@PathVariable Integer id) {
-           return ResponseEntity.ok().body(service.findById(id));
+    public ResponseEntity<EmployeeDTO> findById(@PathVariable Integer id) {
+           return ResponseEntity.ok().body(new EmployeeDTO(service.findById(id)));
         }
 
 }
