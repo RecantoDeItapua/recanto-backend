@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +37,7 @@ public class EmployeeResource {
         return ResponseEntity.ok().body(service.findAll().stream().map(EmployeeDTO::new).collect(Collectors.toList()));
     }
     @PostMapping
-    public ResponseEntity<EmployeeDTO> create(@RequestBody EmployeeDTO obj) {
+    public ResponseEntity<EmployeeDTO> create(@Valid @RequestBody EmployeeDTO obj) {
 
         Employee newObj = service.create(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();

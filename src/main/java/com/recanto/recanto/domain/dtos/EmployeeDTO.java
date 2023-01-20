@@ -3,11 +3,10 @@ package com.recanto.recanto.domain.dtos;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.recanto.recanto.domain.Employee;
 import com.recanto.recanto.enums.Profile;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,8 +16,11 @@ import java.util.stream.Collectors;
 @Setter
 public class EmployeeDTO {
     protected Integer id;
+    @NotNull(message= "name is riquered")
     protected String name;
+    @NotNull(message = "Cpf is riquered")
     protected String cpf;
+    @NotNull(message = "Email is riquered")
     protected String email;
     protected Set<Integer> profiles = new HashSet<>();
 
