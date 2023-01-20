@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@NoArgsConstructor
 @Getter
 @Setter
 public class EmployeeDTO {
@@ -27,6 +26,11 @@ public class EmployeeDTO {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dateCriation = LocalDate.now();
 
+    public EmployeeDTO() {
+        super();
+        addProfile(Profile.RESIDENT);
+    }
+
     public EmployeeDTO(Employee obj) {
         this.id = obj.getId();
         this.name = obj.getName();
@@ -34,6 +38,7 @@ public class EmployeeDTO {
         this.email = obj.getEmail();
         this.profiles = obj.getProfiles().stream().map(Profile::getCode).collect(Collectors.toSet());
         this.dateCriation = obj.getDateCriation();
+        addProfile(Profile.RESIDENT);
     }
 
     public Set<Profile> getProfiles() {

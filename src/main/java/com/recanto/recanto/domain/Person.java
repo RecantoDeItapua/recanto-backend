@@ -68,6 +68,7 @@ public abstract class Person {
         this.cpf = cpf;
         this.email = email;
         this.password = password;
+        addProfiles(Profile.RESIDENT);
 
 
 
