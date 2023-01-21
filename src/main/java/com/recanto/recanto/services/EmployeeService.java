@@ -22,7 +22,7 @@ public class EmployeeService {
 
     public Employee findById(Integer id) {
         Optional<Employee> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Obeject not found: "+ id));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Obeject not found: " + id));
     }
 
     public List<Employee> findAll() {
@@ -45,13 +45,27 @@ public class EmployeeService {
 
     }
 
+
+    public void delete(Integer id) {
+        Employee obj = findById(id);
+        if (
+                obj.getProviders().size() > 0 ||
+                obj.getAnnoucements().size() > 0 ||
+                obj.getOccurrences().size() > 0 ||
+                obj.getReservations().size() > 0
+        ) {
+            throw new DataIntegrityViolationException("Employee cannot be deleted because there are schedule for him");
+        }
+        repository.deleteById(id);
+    }
+
     private void validateByCpfAndEmail(EmployeeDTO objDto) {
         Optional<Person> obj = personRepository.findByCpf(objDto.getCpf());
-        if(obj.isPresent() && obj.get().getId() != objDto.getId()) {
+        if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
             throw new DataIntegrityViolationException("Cpf Already Registered");
         }
         obj = personRepository.findByEmail(objDto.getEmail());
-        if(obj.isPresent() && obj.get().getId() != objDto.getId()) {
+        if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
             throw new DataIntegrityViolationException("Email Already Registered");
         }
     }
