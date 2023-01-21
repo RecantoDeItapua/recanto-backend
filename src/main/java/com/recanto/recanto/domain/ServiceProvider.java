@@ -38,14 +38,6 @@ public class ServiceProvider  {
     @Enumerated(EnumType.STRING)
     private Situation situation ;
 
-    public ServiceProvider(Integer id, String title, String name, String document, String description) {
-        this.id = id;
-        this.title = title;
-        this.name = name;
-        this.document = document;
-        this.description = description;
-    }
-
     private LocalDate dateOpen = LocalDate.now();
     private LocalDate dateFinish;
 
@@ -56,6 +48,14 @@ public class ServiceProvider  {
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    public ServiceProvider(Integer id, String title, String name, String document, String description) {
+        this.id = id;
+        this.title = title;
+        this.name = name;
+        this.document = document;
+        this.description = description;
+    }
 
 
 }

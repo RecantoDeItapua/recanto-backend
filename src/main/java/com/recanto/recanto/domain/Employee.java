@@ -37,7 +37,7 @@ public class Employee extends Person{
 
     public Employee(Integer id, String name, String cpf, String email, String password) {
         super(id, name, cpf, email, password);
-        addProfiles(Profile.CONCIERGE);
+        addProfiles(Profile.EMPLOYEE);
     }
 
     public Employee(EmployeeDTO obj) {
@@ -51,7 +51,7 @@ public class Employee extends Person{
 
     public Employee() {
         super();
-        addProfiles(Profile.CONCIERGE);
+        addProfiles(Profile.EMPLOYEE);
     }
 
 }

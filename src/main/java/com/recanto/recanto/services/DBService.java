@@ -36,7 +36,7 @@ public class DBService {
 
         Employee e1 = new Employee(
                 null,"Jaasiel Oliveira","894.688.570-22", "jaasiel@email.com", "123" );
-        e1.addProfiles(Profile.CONCIERGE);
+        e1.addProfiles(Profile.EMPLOYEE);
 
         a1.setEmployee(e1);
 

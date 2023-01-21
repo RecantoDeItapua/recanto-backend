@@ -1,7 +1,7 @@
 package com.recanto.recanto.domain.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.recanto.recanto.domain.Employee;
+import com.recanto.recanto.domain.Resident;
 import com.recanto.recanto.enums.Profile;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class EmployeeDTO {
+public class ResidentDTO {
     protected Integer id;
     @NotNull(message= "name is riquered")
     protected String name;
@@ -30,19 +30,19 @@ public class EmployeeDTO {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dateCriation = LocalDate.now();
 
-    public EmployeeDTO() {
+    public ResidentDTO() {
         super();
-        addProfile(Profile.EMPLOYEE);
+        addProfile(Profile.RESIDENT);
     }
 
-    public EmployeeDTO(Employee obj) {
+    public ResidentDTO(Resident obj) {
         this.id = obj.getId();
         this.name = obj.getName();
         this.cpf = obj.getCpf();
         this.email = obj.getEmail();
         this.profiles = obj.getProfiles().stream().map(Profile::getCode).collect(Collectors.toSet());
         this.dateCriation = obj.getDateCriation();
-        addProfile(Profile.EMPLOYEE);
+        addProfile(Profile.RESIDENT);
     }
 
     public Set<Profile> getProfiles() {
