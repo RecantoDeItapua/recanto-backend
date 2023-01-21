@@ -10,6 +10,8 @@ import com.recanto.recanto.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +34,11 @@ public class ServiceServiceProvider {
     public ServiceProvider create(ServiceProviderDTO objDto) {
         return repository.save(newServiceProvider(objDto));
     }
+    public ServiceProvider update(Integer id, @Valid ServiceProviderDTO objDto) {
+        objDto.setId(id);
+        ServiceProvider oldObj = findById(id);
+        return oldObj = newServiceProvider(objDto);
+    }
 
     private ServiceProvider newServiceProvider(ServiceProviderDTO objDto) {
         Optional<Person> person = personRepository.findById(objDto.getPerson());
@@ -41,6 +48,9 @@ public class ServiceServiceProvider {
         ServiceProvider serviceProvider = new ServiceProvider();
         if (objDto.getId() != null) {
             serviceProvider.setId(objDto.getId());
+        }
+        if(objDto.getSituation().equals(2)) {
+            serviceProvider.setDateFinish(LocalDate.now()) ;
         }
         serviceProvider.setTitle(objDto.getTitle());
         serviceProvider.setName(objDto.getName());
@@ -52,6 +62,7 @@ public class ServiceServiceProvider {
 
         return serviceProvider;
     }
+
 
 
 }

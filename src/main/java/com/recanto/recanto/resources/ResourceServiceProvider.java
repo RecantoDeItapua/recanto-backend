@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,12 +36,17 @@ public class ResourceServiceProvider {
       return   ResponseEntity.ok().body(service.findAll()
               .stream().map(ServiceProviderDTO::new).collect(Collectors.toList()));
     }
-    @PutMapping
+    @PostMapping
     public ResponseEntity<ServiceProviderDTO> create(@Valid @RequestBody ServiceProviderDTO objDto) {
             ServiceProvider obj = service.create(objDto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ServiceProviderDTO> update(@PathVariable Integer id, @RequestBody ServiceProviderDTO objDto) {
+        return ResponseEntity.ok().body(new ServiceProviderDTO(service.update(id, objDto)));
     }
 }
