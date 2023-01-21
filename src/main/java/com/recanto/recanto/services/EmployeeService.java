@@ -36,6 +36,15 @@ public class EmployeeService {
         return repository.save(newEmployee);
     }
 
+    public Employee update(Integer id, EmployeeDTO objDto) {
+        objDto.setId(id);
+        Employee oldObj = findById(id);
+        validateByCpfAndEmail(objDto);
+        oldObj = new Employee(objDto);
+        return repository.save(oldObj);
+
+    }
+
     private void validateByCpfAndEmail(EmployeeDTO objDto) {
         Optional<Person> obj = personRepository.findByCpf(objDto.getCpf());
         if(obj.isPresent() && obj.get().getId() != objDto.getId()) {
@@ -46,4 +55,6 @@ public class EmployeeService {
             throw new DataIntegrityViolationException("Email Already Registered");
         }
     }
+
+
 }

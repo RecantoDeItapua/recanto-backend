@@ -5,6 +5,7 @@ import com.recanto.recanto.domain.Employee;
 import com.recanto.recanto.enums.Profile;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class EmployeeDTO {
     @NotNull(message= "name is riquered")
     protected String name;
     @NotNull(message = "Cpf is riquered")
+    @CPF
     protected String cpf;
     @NotNull(message = "Email is riquered")
     protected String email;
