@@ -36,7 +36,7 @@ public class ServiceProvider  {
     private String car;
     private String description;
 
-    @Enumerated(EnumType.STRING)
+
     private Situation situation ;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -49,12 +49,14 @@ public class ServiceProvider  {
     private Person person;
 
 
-    public ServiceProvider(Integer id, String title, String name, String document, String description) {
+    public ServiceProvider(Integer id, String title, String name, String document, String description, Integer situation) {
         this.id = id;
         this.title = title;
         this.name = name;
         this.document = document;
         this.description = description;
+
+        this.situation = Situation.toEnum(situation);
     }
 
 

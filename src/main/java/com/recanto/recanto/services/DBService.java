@@ -44,8 +44,8 @@ public class DBService {
 
 
         ServiceProvider s1 = new ServiceProvider(
-                null,"Encanamento","Luis Carlos","878.872.280-50","Realizar serviço solicitado pela moradora");
-        s1.setSituation(Situation.ABERTO);
+                null,"Encanamento","Luis Carlos","878.872.280-50","Realizar serviço solicitado pela moradora", Situation.ABERTO.getCode());
+
         s1.setPerson(r1);
         s1.setCar("JQS-7322");
 

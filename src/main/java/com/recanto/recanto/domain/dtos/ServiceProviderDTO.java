@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -15,16 +16,22 @@ import java.time.LocalDate;
 @Setter
 public class ServiceProviderDTO {
     private Integer id;
+    @NotNull(message = "O campo TITLE é requerido")
     private String title;
+    @NotNull(message = "O campo NAME é requerido")
     private String name;
+    @NotNull(message = "O campo DOCUMENT é requerido")
     private String document;
     private String car;
+    @NotNull(message = "O campo DESCRIPTION é requerido")
     private String description;
+    @NotNull(message = "O campo SITUATION é requerido")
     private Integer situation ;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateOpen = LocalDate.now();
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateFinish;
+    @NotNull(message = "O campo PERSON é requerido")
     private Integer person;
     private String personName;
 
