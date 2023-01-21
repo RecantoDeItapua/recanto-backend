@@ -27,6 +27,8 @@ public class DBService {
     @Autowired
     private AnnoucementsRepository annoucementsRepository;
 
+
+
     public void instenceDB() {
         Resident r1 = new Resident(
                 null, "Jonas Oliveira","894.688.570-00", "jonas@email.com", "123");
@@ -44,8 +46,10 @@ public class DBService {
         ServiceProvider s1 = new ServiceProvider(
                 null,"Encanamento","Luis Carlos","878.872.280-50","Realizar serviço solicitado pela moradora");
         s1.setSituation(Situation.ABERTO);
-        s1.setResident(r1);
+        s1.setPerson(r1);
         s1.setCar("JQS-7322");
+
+
 
         residentRepository.saveAll(Arrays.asList(r1));
         employeeRepository.saveAll(Arrays.asList(e1));

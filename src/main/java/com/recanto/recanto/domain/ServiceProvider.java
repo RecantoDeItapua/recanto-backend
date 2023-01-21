@@ -1,5 +1,6 @@
 package com.recanto.recanto.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.recanto.recanto.enums.Situation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,16 +39,15 @@ public class ServiceProvider  {
     @Enumerated(EnumType.STRING)
     private Situation situation ;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateOpen = LocalDate.now();
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateFinish;
 
     @ManyToOne
-    @JoinColumn(name = "resident_id")
-    private Resident resident;
+    @JoinColumn(name = "person_id")
+    private Person person;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
 
     public ServiceProvider(Integer id, String title, String name, String document, String description) {
         this.id = id;

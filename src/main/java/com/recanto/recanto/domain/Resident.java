@@ -23,9 +23,7 @@ import java.util.stream.Collectors;
 @Entity
 public class Resident extends Person {
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "resident")
-    private List<ServiceProvider> providers = new ArrayList<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "resident")
     private List<Annoucements> annoucements = new ArrayList<>();

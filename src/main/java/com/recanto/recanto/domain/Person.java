@@ -1,6 +1,7 @@
 package com.recanto.recanto.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.recanto.recanto.enums.Profile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,8 +17,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,6 +59,10 @@ public abstract class Person {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dateCriation = LocalDate.now();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "person")
+    private List<ServiceProvider> providers = new ArrayList<>();
 
     public Person() {
         super();
