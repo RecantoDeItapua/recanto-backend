@@ -1,5 +1,7 @@
 package com.recanto.recanto.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.recanto.recanto.enums.Situation;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,19 +28,22 @@ public class Occurrences {
     private Integer id;
     private String title;
     private String description;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate openDate = LocalDate.now();
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate finishDate;
+    private Situation situation;
 
     @ManyToOne
-    @JoinColumn(name = "resident_id")
-    private Resident resident;
+    @JoinColumn(name = "person_id")
+    private Person person;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
 
-    public Occurrences(Integer id, String title, String description) {
+    public Occurrences(Integer id, String title, String description, Integer situation) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.situation = Situation.toEnum(situation);
+
     }
 }

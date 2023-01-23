@@ -1,7 +1,10 @@
 package com.recanto.recanto.resources;
 
+import com.recanto.recanto.domain.Occurrences;
 import com.recanto.recanto.domain.ServiceProvider;
+import com.recanto.recanto.domain.dtos.OccurrencesDTO;
 import com.recanto.recanto.domain.dtos.ServiceProviderDTO;
+import com.recanto.recanto.services.OccurrenceService;
 import com.recanto.recanto.services.ServiceServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,24 +23,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/providers")
-public class ResourceServiceProvider {
+@RequestMapping(value = "/occurrences")
+public class OccurrenceResource {
     @Autowired
-    private ServiceServiceProvider service;
+    private OccurrenceService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ServiceProviderDTO> findById(@PathVariable Integer id) {
-       return ResponseEntity.ok().body(new ServiceProviderDTO(service.findById(id)));
+    public ResponseEntity<OccurrencesDTO> findById(@PathVariable Integer id) {
+       return ResponseEntity.ok().body(new OccurrencesDTO(service.findById(id)));
     }
 
     @GetMapping
-    public ResponseEntity<List<ServiceProviderDTO>> findAll() {
+    public ResponseEntity<List<OccurrencesDTO>> findAll() {
       return   ResponseEntity.ok().body(service.findAll()
-              .stream().map(ServiceProviderDTO::new).collect(Collectors.toList()));
+              .stream().map(OccurrencesDTO::new).collect(Collectors.toList()));
     }
     @PostMapping
-    public ResponseEntity<ServiceProviderDTO> create(@Valid @RequestBody ServiceProviderDTO objDto) {
-            ServiceProvider obj = service.create(objDto);
+    public ResponseEntity<OccurrencesDTO> create(@Valid @RequestBody OccurrencesDTO objDto) {
+            Occurrences obj = service.create(objDto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(obj.getId()).toUri();
@@ -45,7 +48,7 @@ public class ResourceServiceProvider {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ServiceProviderDTO> update(@PathVariable Integer id, @RequestBody ServiceProviderDTO objDto) {
-        return ResponseEntity.ok().body(new ServiceProviderDTO(service.update(id, objDto)));
+    public ResponseEntity<OccurrencesDTO> update(@PathVariable Integer id, @RequestBody OccurrencesDTO objDto) {
+        return ResponseEntity.ok().body(new OccurrencesDTO(service.update(id, objDto)));
     }
 }

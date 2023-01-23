@@ -67,8 +67,13 @@ public abstract class Person {
     @OneToMany(mappedBy = "person")
     private List<Annoucements> annoucements = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "person")
     private List<Occurrences> occurrences = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "person")
+    private List<Reservation> reservations = new ArrayList<>();
 
     public Person() {
         super();
