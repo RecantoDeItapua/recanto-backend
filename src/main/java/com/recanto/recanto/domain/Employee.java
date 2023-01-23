@@ -21,12 +21,7 @@ import java.util.stream.Collectors;
 @Setter
 public class Employee extends Person{
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "employee")
-    private List<ServiceProvider> providers = new ArrayList<>();
-    @JsonIgnore
-    @OneToMany(mappedBy = "employee")
-    private List<Annoucements> annoucements = new ArrayList<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<Reservation> reservations = new ArrayList<>();

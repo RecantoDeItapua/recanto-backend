@@ -32,8 +32,10 @@ public class ServiceServiceProvider {
     }
 
     public ServiceProvider create(ServiceProviderDTO objDto) {
+
         return repository.save(newServiceProvider(objDto));
     }
+
     public ServiceProvider update(Integer id, @Valid ServiceProviderDTO objDto) {
         objDto.setId(id);
         ServiceProvider oldObj = findById(id);

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.recanto.recanto.enums.Profile;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -63,6 +62,13 @@ public abstract class Person {
     @JsonIgnore
     @OneToMany(mappedBy = "person")
     private List<ServiceProvider> providers = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "person")
+    private List<Annoucements> annoucements = new ArrayList<>();
+
+    @OneToMany(mappedBy = "person")
+    private List<Occurrences> occurrences = new ArrayList<>();
 
     public Person() {
         super();

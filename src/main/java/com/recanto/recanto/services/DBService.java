@@ -40,7 +40,7 @@ public class DBService {
                 null,"Jaasiel Oliveira","894.688.570-22", "jaasiel@email.com", "123" );
         e1.addProfiles(Profile.EMPLOYEE);
 
-        a1.setEmployee(e1);
+        a1.setPerson(e1);
 
 
         ServiceProvider s1 = new ServiceProvider(

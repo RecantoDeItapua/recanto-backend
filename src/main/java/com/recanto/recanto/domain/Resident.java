@@ -24,15 +24,12 @@ import java.util.stream.Collectors;
 public class Resident extends Person {
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "resident")
-    private List<Annoucements> annoucements = new ArrayList<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "resident")
     private List<Reservation> reservations = new ArrayList<>();
     @JsonIgnore
-    @OneToMany(mappedBy = "resident")
-    private List<Occurrences> occurrences = new ArrayList<>();
+
 
     public Resident(Integer id, String name, String cpf, String email, String password) {
         super(id, name, cpf, email, password);

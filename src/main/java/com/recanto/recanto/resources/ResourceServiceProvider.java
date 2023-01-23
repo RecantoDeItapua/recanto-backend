@@ -3,7 +3,6 @@ package com.recanto.recanto.resources;
 import com.recanto.recanto.domain.ServiceProvider;
 import com.recanto.recanto.domain.dtos.ServiceProviderDTO;
 import com.recanto.recanto.services.ServiceServiceProvider;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

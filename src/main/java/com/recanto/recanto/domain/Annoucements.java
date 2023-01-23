@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
@@ -23,7 +24,9 @@ public class Annoucements {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull(message= "O campo TITLE é requerido")
     private String title;
+    @NotNull(message= "O campo DESCRIPTION é requerido")
     private String description;
 
     public Annoucements(Integer id, String title, String description) {
@@ -33,12 +36,10 @@ public class Annoucements {
     }
 
     @ManyToOne
-    @JoinColumn(name = "resident_id")
-    private Resident resident;
+    @JoinColumn(name = "person_id")
+    private Person person;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+
 
     @JsonFormat(pattern = "dd/MM/YYYY")
     private LocalDate openDate = LocalDate.now();
