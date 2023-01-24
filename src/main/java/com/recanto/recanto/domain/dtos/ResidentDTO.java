@@ -24,6 +24,7 @@ public class ResidentDTO {
     protected String cpf;
     @NotNull(message = "Email is riquered")
     protected String email;
+    protected String password;
     protected Set<Integer> profiles = new HashSet<>();
 
 

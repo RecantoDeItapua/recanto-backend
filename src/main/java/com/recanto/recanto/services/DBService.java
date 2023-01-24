@@ -11,6 +11,7 @@ import com.recanto.recanto.repository.EmployeeRepository;
 import com.recanto.recanto.repository.ResidentRepository;
 import com.recanto.recanto.repository.ServiceProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -26,6 +27,8 @@ public class DBService {
     private ServiceProviderRepository serviceProviderRepository;
     @Autowired
     private AnnoucementsRepository annoucementsRepository;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
 
 
@@ -37,7 +40,7 @@ public class DBService {
         Annoucements a1 = new Annoucements(null,"Assembleia Geral", "No dia 15 de novembro não teremos assembleia");
 
         Employee e1 = new Employee(
-                null,"Jaasiel Oliveira","894.688.570-22", "jaasiel@email.com", "123" );
+                null,"Jaasiel Oliveira","894.688.570-22", "jaasiel@email.com", encoder.encode("123") );
         e1.addProfiles(Profile.EMPLOYEE);
 
         a1.setPerson(e1);

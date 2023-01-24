@@ -8,6 +8,7 @@ import com.recanto.recanto.repository.PersonRepository;
 import com.recanto.recanto.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public class EmployeeService {
     private EmployeeRepository repository;
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     public Employee findById(Integer id) {
         Optional<Employee> obj = repository.findById(id);
@@ -31,13 +34,17 @@ public class EmployeeService {
 
     public Employee create(EmployeeDTO obj) {
         obj.setId(null);
+        obj.setPassword(encoder.encode(obj.getPassword()));
+
         validateByCpfAndEmail(obj);
         Employee newEmployee = new Employee(obj);
+
         return repository.save(newEmployee);
     }
 
     public Employee update(Integer id, EmployeeDTO objDto) {
         objDto.setId(id);
+        objDto.setPassword(encoder.encode(objDto.getPassword()));
         Employee oldObj = findById(id);
         validateByCpfAndEmail(objDto);
         oldObj = new Employee(objDto);

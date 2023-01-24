@@ -8,6 +8,7 @@ import com.recanto.recanto.domain.Resident;
 import com.recanto.recanto.domain.dtos.ResidentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public class ResidentService {
     private ResidentRepository repository;
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     public Resident findById(Integer id) {
         Optional<Resident> obj = repository.findById(id);
@@ -31,6 +34,7 @@ public class ResidentService {
 
     public Resident create(ResidentDTO obj) {
         obj.setId(null);
+        obj.setPassword(encoder.encode(obj.getPassword()));
         validateByCpfAndEmail(obj);
         Resident newResident = new Resident(obj);
         return repository.save(newResident);
@@ -38,6 +42,7 @@ public class ResidentService {
 
     public Resident update(Integer id, ResidentDTO objDto) {
         objDto.setId(id);
+        objDto.setPassword(encoder.encode(objDto.getPassword()));
         Resident oldObj = findById(id);
         validateByCpfAndEmail(objDto);
         oldObj = new Resident(objDto);
