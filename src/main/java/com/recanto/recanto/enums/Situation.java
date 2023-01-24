@@ -21,6 +21,6 @@ public enum Situation {
                 return perfil;
             }
         }
-        throw new IllegalArgumentException("Pagamento inválido");
+        throw new IllegalArgumentException("Tipo de situação não corresponde a um tipo válido.");
     }
 }

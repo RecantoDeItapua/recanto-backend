@@ -75,6 +75,10 @@ public abstract class Person {
     @OneToMany(mappedBy = "person")
     private List<Reservation> reservations = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "person")
+    private List<Reservation> payments = new ArrayList<>();
+
     public Person() {
         super();
         addProfiles(Profile.RESIDENT);
