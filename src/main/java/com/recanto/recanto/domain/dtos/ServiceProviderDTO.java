@@ -2,7 +2,6 @@ package com.recanto.recanto.domain.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.recanto.recanto.domain.ServiceProvider;
-import com.recanto.recanto.enums.Situation;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

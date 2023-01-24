@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,16 +25,16 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String title;
-    @Column(unique = true)
+
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime dateTime;
+    private LocalDateTime openDate = LocalDateTime.now();
+
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    private LocalDateTime reserveDate;
+
 
     @ManyToOne
-    @JoinColumn(name = "resident_id")
-    private Resident resident;
+    @JoinColumn(name = "person_id")
+    private Person person;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
 }

@@ -15,19 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @EqualsAndHashCode
-@AllArgsConstructor
 @Entity
 @Getter
 @Setter
 public class Employee extends Person{
-
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "employee")
-    private List<Reservation> reservations = new ArrayList<>();
-    @JsonIgnore
-    @OneToMany(mappedBy = "employee")
-    private List<Occurrences> occurrences = new ArrayList<>();
 
 
     public Employee(Integer id, String name, String cpf, String email, String password) {
