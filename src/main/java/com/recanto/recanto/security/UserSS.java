@@ -10,12 +10,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class UserSS implements UserDetails {
-    private Integer id;
-    private String email;
-    private String password;
-    private  Collection<? extends GrantedAuthority> authorities;
+    private final Integer id;
+    private final String email;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public UserSS(Integer id, String email, String password, Set<Profile> profiles) {
+        super();
         this.id = id;
         this.email = email;
         this.password = password;
@@ -25,21 +26,21 @@ public class UserSS implements UserDetails {
     }
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return this.email;
+        return email;
     }
 
     @Override

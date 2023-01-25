@@ -5,6 +5,7 @@ import com.recanto.recanto.domain.dtos.PaymentDTO;
 import com.recanto.recanto.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,16 +27,20 @@ public class PaymentResource {
     @Autowired
     private PaymentService service;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<PaymentDTO> findById(@PathVariable Integer id) {
        return ResponseEntity.ok().body(new PaymentDTO(service.findById(id)));
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @GetMapping
     public ResponseEntity<List<PaymentDTO>> findAll() {
       return   ResponseEntity.ok().body(service.findAll()
               .stream().map(PaymentDTO::new).collect(Collectors.toList()));
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PostMapping
     public ResponseEntity<PaymentDTO> create(@Valid @RequestBody PaymentDTO objDto) {
             Payment obj = service.create(objDto);
@@ -45,11 +50,13 @@ public class PaymentResource {
         return ResponseEntity.created(uri).build();
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<PaymentDTO> update(@PathVariable Integer id, @RequestBody PaymentDTO objDto) {
         return ResponseEntity.ok().body(new PaymentDTO(service.update(id, objDto)));
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<PaymentDTO> delete(@PathVariable Integer id) {
         service.delete(id);

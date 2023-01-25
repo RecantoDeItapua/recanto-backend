@@ -7,6 +7,7 @@ import com.recanto.recanto.domain.dtos.ResidentDTO;
 import com.recanto.recanto.services.AnnoucementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,18 +29,20 @@ public class AnnoucementsResource {
     @Autowired
     private AnnoucementsService service;
 
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<AnnoucementsDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.ok().body(new AnnoucementsDTO(service.findById(id)));
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @GetMapping
     public ResponseEntity<List<AnnoucementsDTO>> findAll() {
         return ResponseEntity.ok().body(
                 service.findAll().stream().map(AnnoucementsDTO::new).collect(Collectors.toList()));
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PostMapping
     public ResponseEntity<AnnoucementsDTO> create(@Valid @RequestBody AnnoucementsDTO objDto) {
 
@@ -49,11 +52,13 @@ public class AnnoucementsResource {
         return ResponseEntity.created(uri).build();
 
     }
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Annoucements> update(@PathVariable Integer id, @Valid @RequestBody AnnoucementsDTO objDto) {
        return ResponseEntity.ok().body( service.update(id, objDto));
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Annoucements> delete(@PathVariable Integer id) {
         service.delete(id);
