@@ -1,11 +1,8 @@
 package com.recanto.recanto.resources;
 
 import com.recanto.recanto.domain.Reservation;
-import com.recanto.recanto.domain.ServiceProvider;
 import com.recanto.recanto.domain.dtos.ReservationDTO;
-import com.recanto.recanto.domain.dtos.ServiceProviderDTO;
 import com.recanto.recanto.services.ReservationService;
-import com.recanto.recanto.services.ServiceServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -59,7 +56,7 @@ public class ReservationResource {
         return ResponseEntity.ok().body(new ReservationDTO(service.update(id, objDto)));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<ReservationDTO> delete(@PathVariable Integer id) {
         service.delete(id);

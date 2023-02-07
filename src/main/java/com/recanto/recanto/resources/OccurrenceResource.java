@@ -1,11 +1,8 @@
 package com.recanto.recanto.resources;
 
 import com.recanto.recanto.domain.Occurrences;
-import com.recanto.recanto.domain.ServiceProvider;
 import com.recanto.recanto.domain.dtos.OccurrencesDTO;
-import com.recanto.recanto.domain.dtos.ServiceProviderDTO;
 import com.recanto.recanto.services.OccurrenceService;
-import com.recanto.recanto.services.ServiceServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

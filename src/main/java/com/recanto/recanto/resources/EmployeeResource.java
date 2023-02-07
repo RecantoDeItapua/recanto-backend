@@ -35,7 +35,8 @@ public class EmployeeResource {
     public ResponseEntity<EmployeeDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.ok().body(new EmployeeDTO(service.findById(id)));
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @GetMapping
     public ResponseEntity<List<EmployeeDTO>> findAll() {
         return ResponseEntity.ok().body(service.findAll().stream().map(EmployeeDTO::new).collect(Collectors.toList()));
@@ -53,7 +54,7 @@ public class EmployeeResource {
     }
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<EmployeeDTO> update(@PathVariable Integer id, @Valid @RequestBody EmployeeDTO objDto) {
+    public ResponseEntity<EmployeeDTO> update(@PathVariable Integer id, @RequestBody EmployeeDTO objDto) {
        return ResponseEntity.ok().body( new EmployeeDTO(service.update(id, objDto)));
     }
 

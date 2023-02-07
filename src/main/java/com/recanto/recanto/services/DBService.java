@@ -34,7 +34,7 @@ public class DBService {
 
     public void instenceDB() {
         Resident r1 = new Resident(
-                null, "Jonas Oliveira","894.688.570-00", "jonas@email.com", "123");
+                null, "Jonas Oliveira","894.688.570-00", "jonas@email.com", encoder.encode("123"));
         r1.addProfiles(Profile.ADMIN);
 
         Annoucements a1 = new Annoucements(null,"Assembleia Geral", "No dia 15 de novembro não teremos assembleia");

@@ -2,15 +2,11 @@ package com.recanto.recanto.services;
 
 import com.recanto.recanto.domain.Annoucements;
 import com.recanto.recanto.domain.Person;
-import com.recanto.recanto.domain.Resident;
 import com.recanto.recanto.domain.dtos.AnnoucementsDTO;
-import com.recanto.recanto.domain.dtos.ResidentDTO;
 import com.recanto.recanto.repository.AnnoucementsRepository;
 import com.recanto.recanto.repository.PersonRepository;
-import com.recanto.recanto.repository.ResidentRepository;
 import com.recanto.recanto.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

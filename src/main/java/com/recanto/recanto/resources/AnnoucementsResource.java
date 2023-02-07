@@ -1,9 +1,7 @@
 package com.recanto.recanto.resources;
 
 import com.recanto.recanto.domain.Annoucements;
-import com.recanto.recanto.domain.Resident;
 import com.recanto.recanto.domain.dtos.AnnoucementsDTO;
-import com.recanto.recanto.domain.dtos.ResidentDTO;
 import com.recanto.recanto.services.AnnoucementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +43,6 @@ public class AnnoucementsResource {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PostMapping
     public ResponseEntity<AnnoucementsDTO> create(@Valid @RequestBody AnnoucementsDTO objDto) {
-
         Annoucements newObj = service.create(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 

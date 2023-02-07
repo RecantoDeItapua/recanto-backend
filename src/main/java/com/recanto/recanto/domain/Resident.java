@@ -27,6 +27,7 @@ public class Resident extends Person {
         this.name = obj.getName();
         this.cpf = obj.getCpf();
         this.email = obj.getEmail();
+        this.password= obj.getPassword();
         this.profiles = obj.getProfiles().stream().map(Profile::getCode).collect(Collectors.toSet());
         this.dateCriation = obj.getDateCriation();
     }

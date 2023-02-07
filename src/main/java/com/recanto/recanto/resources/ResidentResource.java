@@ -36,13 +36,13 @@ public class ResidentResource {
         return ResponseEntity.ok().body(new ResidentDTO(service.findById(id)));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @GetMapping
     public ResponseEntity<List<ResidentDTO>> findAll() {
         return ResponseEntity.ok().body(service.findAll().stream().map(ResidentDTO::new).collect(Collectors.toList()));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PostMapping
     public ResponseEntity<ResidentDTO> create(@Valid @RequestBody ResidentDTO objDto) {
 
@@ -52,6 +52,7 @@ public class ResidentResource {
         return ResponseEntity.created(uri).build();
 
     }
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<ResidentDTO> update(@PathVariable Integer id, @Valid @RequestBody ResidentDTO objDto) {

@@ -39,7 +39,7 @@ public class PaymentService {
     public Payment update(Integer id, @Valid PaymentDTO objDto) {
         objDto.setId(id);
         Payment oldObj = findById(id);
-        return oldObj = newPayment(objDto);
+        return repository.save(newPayment(objDto));
     }
 
     private Payment newPayment(PaymentDTO objDto) {
@@ -53,12 +53,12 @@ public class PaymentService {
             payment.setId(objDto.getId());
         }
 
-        if (objDto.getSituation().equals(2)){
+        if (objDto.getSituation().equals(1)){
             payment.setFinishPayment(LocalDate.now());
         }
         payment.setTitle(objDto.getTitle());
         payment.setCash(objDto.getCash());
-        payment.setDatePayment(objDto.getDatePayment());
+        payment.setDatePayment(LocalDate.now());
         payment.setSituation(Situation.toEnum(objDto.getSituation()));
         payment.setPerson(person.get());
 

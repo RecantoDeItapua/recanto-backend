@@ -1,17 +1,12 @@
 package com.recanto.recanto.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.recanto.recanto.domain.dtos.EmployeeDTO;
 import com.recanto.recanto.enums.Profile;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @EqualsAndHashCode
@@ -31,6 +26,7 @@ public class Employee extends Person{
         this.name = obj.getName();
         this.cpf = obj.getCpf();
         this.email = obj.getEmail();
+        this.password= obj.getPassword();
         this.profiles = obj.getProfiles().stream().map(Profile::getCode).collect(Collectors.toSet());
         this.dateCriation = obj.getDateCriation();
     }

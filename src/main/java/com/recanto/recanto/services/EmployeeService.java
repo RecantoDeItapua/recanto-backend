@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,28 +26,32 @@ public class EmployeeService {
 
     public Employee findById(Integer id) {
         Optional<Employee> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Obeject not found: " + id));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!: " + id));
     }
 
     public List<Employee> findAll() {
         return repository.findAll();
     }
 
-    public Employee create(EmployeeDTO obj) {
-        obj.setId(null);
-        obj.setPassword(encoder.encode(obj.getPassword()));
+    public Employee create(EmployeeDTO objDto) {
+        objDto.setId(null);
 
-        validateByCpfAndEmail(obj);
-        Employee newEmployee = new Employee(obj);
-
+        validateByCpfAndEmail(objDto);
+        Employee newEmployee = new Employee(objDto);
+        newEmployee.setPassword(encoder.encode(objDto.getPassword()));
         return repository.save(newEmployee);
     }
 
-    public Employee update(Integer id, EmployeeDTO objDto) {
+    public Employee update(Integer id,@Valid EmployeeDTO objDto) {
         objDto.setId(id);
-        objDto.setPassword(encoder.encode(objDto.getPassword()));
+
         Employee oldObj = findById(id);
+
+        if(!objDto.getPassword().equals(oldObj.getPassword()))
+            objDto.setPassword(encoder.encode(objDto.getPassword()));
+
         validateByCpfAndEmail(objDto);
+
         oldObj = new Employee(objDto);
         return repository.save(oldObj);
 
@@ -61,7 +66,7 @@ public class EmployeeService {
                 obj.getOccurrences().size() > 0 ||
                 obj.getReservations().size() > 0
         ) {
-            throw new DataIntegrityViolationException("Employee cannot be deleted because there are schedule for him");
+            throw new DataIntegrityViolationException("Funcionário não pode ser deletado pois existe relação com outros serviços");
         }
         repository.deleteById(id);
     }
@@ -69,13 +74,17 @@ public class EmployeeService {
     private void validateByCpfAndEmail(EmployeeDTO objDto) {
         Optional<Person> obj = personRepository.findByCpf(objDto.getCpf());
         if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
-            throw new DataIntegrityViolationException("Cpf Already Registered");
+            throw new DataIntegrityViolationException("CPF já cadastrado!");
         }
         obj = personRepository.findByEmail(objDto.getEmail());
         if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
-            throw new DataIntegrityViolationException("Email Already Registered");
+            throw new DataIntegrityViolationException("E-mail já cadastrado!");
         }
     }
 
 
+    public Employee findByEmail(String email) {
+        Optional<Employee> obj = repository.findByEmail(email);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!: " + email));
+    }
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Situation {
-    ABERTO(0, "ABERTO"),PENDENTE(1, "PENDENTE"), FINALIZADO(2, "FINALIZADO");
+    ABERTO(0, "ABERTO"), FINALIZADO(1, "FINALIZADO");
 
     private final Integer code;
     private final String description;

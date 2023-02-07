@@ -42,8 +42,11 @@ public class ResidentService {
 
     public Resident update(Integer id, ResidentDTO objDto) {
         objDto.setId(id);
-        objDto.setPassword(encoder.encode(objDto.getPassword()));
+
         Resident oldObj = findById(id);
+        if(!objDto.getPassword().equals(oldObj.getPassword()))
+            objDto.setPassword(encoder.encode(objDto.getPassword()));
+
         validateByCpfAndEmail(objDto);
         oldObj = new Resident(objDto);
         return repository.save(oldObj);

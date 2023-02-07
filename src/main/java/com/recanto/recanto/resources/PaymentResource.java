@@ -33,7 +33,7 @@ public class PaymentResource {
        return ResponseEntity.ok().body(new PaymentDTO(service.findById(id)));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @GetMapping
     public ResponseEntity<List<PaymentDTO>> findAll() {
       return   ResponseEntity.ok().body(service.findAll()

@@ -12,13 +12,15 @@ import java.util.stream.Collectors;
 public class UserSS implements UserDetails {
     private final Integer id;
     private final String email;
+    private final String name;
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserSS(Integer id, String email, String password, Set<Profile> profiles) {
+    public UserSS(Integer id, String email, String name, String password, Set<Profile> profiles) {
         super();
         this.id = id;
         this.email = email;
+        this.name = name;
         this.password = password;
         this.authorities = profiles.stream().map(
                 profile -> new SimpleGrantedAuthority(
@@ -28,6 +30,7 @@ public class UserSS implements UserDetails {
     public Integer getId() {
         return id;
     }
+    public String getName() {return name;}
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

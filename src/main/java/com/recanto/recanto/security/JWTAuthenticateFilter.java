@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -15,7 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class JWTAuthenticateFilter extends UsernamePasswordAuthenticationFilter {
@@ -44,9 +49,16 @@ public class JWTAuthenticateFilter extends UsernamePasswordAuthenticationFilter 
             Authentication authResult) throws IOException, ServletException {
 
         String username = ((UserSS) authResult.getPrincipal()).getUsername();
+        String name = ((UserSS) authResult.getPrincipal()).getName();
+        Integer Id = ((UserSS) authResult.getPrincipal()).getId();
+        List<String> roles = ((UserSS) authResult.getPrincipal()).getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+
         String token = jwtUtil.generateToken(username);
         response.setHeader("access-control-expose-headers", "Authorization");
-        response.setHeader("Authorization", "Bearer " + token);
+        response.setHeader("Authorization", "Bearer " + token +" "+ String.valueOf(Id) + " " + name + " " + roles);
+
+
     }
 
     @Override
