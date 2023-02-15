@@ -3,6 +3,7 @@ package com.recanto.recanto.services;
 import com.recanto.recanto.domain.Payment;
 import com.recanto.recanto.domain.Person;
 import com.recanto.recanto.domain.dtos.PaymentDTO;
+import com.recanto.recanto.enums.ModePayment;
 import com.recanto.recanto.enums.Situation;
 import com.recanto.recanto.repository.PaymentRepository;
 import com.recanto.recanto.repository.PersonRepository;
@@ -60,6 +61,7 @@ public class PaymentService {
         payment.setCash(objDto.getCash());
         payment.setDatePayment(LocalDate.now());
         payment.setSituation(Situation.toEnum(objDto.getSituation()));
+        payment.setModePayment(ModePayment.toEnum(objDto.getModePayment()));
         payment.setPerson(person.get());
 
         return payment;

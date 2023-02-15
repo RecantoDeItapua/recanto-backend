@@ -6,6 +6,7 @@ import com.recanto.recanto.services.ServiceServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,8 +50,9 @@ public class ServiceProviderResource {
         return ResponseEntity.created(uri).build();
     }
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<ServiceProviderDTO> update(@PathVariable Integer id, @RequestBody ServiceProviderDTO objDto) {
-        return ResponseEntity.ok().body(new ServiceProviderDTO(service.update(id, objDto)));
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<ServiceProviderDTO> delete(@PathVariable Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -29,6 +29,7 @@ public class Employee extends Person{
         this.password= obj.getPassword();
         this.profiles = obj.getProfiles().stream().map(Profile::getCode).collect(Collectors.toSet());
         this.dateCriation = obj.getDateCriation();
+        addProfiles(Profile.EMPLOYEE);
     }
 
     public Employee() {

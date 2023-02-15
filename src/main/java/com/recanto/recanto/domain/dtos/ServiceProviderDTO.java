@@ -22,10 +22,8 @@ public class ServiceProviderDTO {
     private String title;
     @NotNull(message = "O campo NAME é requerido")
     private String name;
-    @NotNull(message = "O campo DOCUMENT é requerido")
     private String document;
     private String car;
-    @NotNull(message = "O campo DESCRIPTION é requerido")
     private String description;
     @NotNull(message = "O campo SITUATION é requerido")
     private Integer situation ;

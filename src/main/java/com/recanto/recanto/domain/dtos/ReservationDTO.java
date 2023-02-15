@@ -21,8 +21,10 @@ public class ReservationDTO {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime openDate = LocalDateTime.now();
 
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime reserveDate;
+
+    private Integer localReservation;
+    private Integer reservationAuthorite;
 
     private Integer person;
     private String personName;
@@ -30,6 +32,8 @@ public class ReservationDTO {
     public ReservationDTO(Reservation obj) {
         this.id = obj.getId();
         this.openDate = obj.getOpenDate();
+        this.localReservation = obj.getLocalReservation().getCode();
+        this.reservationAuthorite = obj.getReservationAuthorite().getCode();
         this.reserveDate = obj.getReserveDate();
         this.person = obj.getPerson().getId();
         this.personName = obj.getPerson().getName();

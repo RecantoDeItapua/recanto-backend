@@ -1,6 +1,7 @@
 package com.recanto.recanto.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.recanto.recanto.enums.ModePayment;
 import com.recanto.recanto.enums.Situation;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -30,6 +31,7 @@ public class Payment {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate datePayment = LocalDate.now();
     private Situation situation;
+    private ModePayment modePayment;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate finishPayment;
     private Double cash;

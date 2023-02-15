@@ -30,6 +30,7 @@ public class Resident extends Person {
         this.password= obj.getPassword();
         this.profiles = obj.getProfiles().stream().map(Profile::getCode).collect(Collectors.toSet());
         this.dateCriation = obj.getDateCriation();
+        addProfiles(Profile.RESIDENT);
     }
 
     public Resident() {

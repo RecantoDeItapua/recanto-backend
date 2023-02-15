@@ -21,6 +21,7 @@ public class PaymentDTO {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate datePayment = LocalDate.now();
     private Integer situation;
+    private Integer modePayment;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate finishPayment;
     private Integer person;
@@ -33,6 +34,7 @@ public class PaymentDTO {
         this.cash = obj.getCash();
         this.datePayment = obj.getDatePayment();
         this.situation = obj.getSituation().getCode();
+        this.modePayment = obj.getModePayment().getCode();
         this.finishPayment = obj.getFinishPayment();
         this.person = obj.getPerson().getId();
         this.personName = obj.getPerson().getName();

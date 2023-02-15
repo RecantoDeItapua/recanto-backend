@@ -65,6 +65,9 @@ public class ServiceServiceProvider {
         return serviceProvider;
     }
 
+    public void delete(Integer id) {
+         repository.deleteById(id);
+    }
 
 
 }

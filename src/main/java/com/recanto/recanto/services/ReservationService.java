@@ -3,6 +3,8 @@ package com.recanto.recanto.services;
 import com.recanto.recanto.domain.Person;
 import com.recanto.recanto.domain.Reservation;
 import com.recanto.recanto.domain.dtos.ReservationDTO;
+import com.recanto.recanto.enums.LocalReservation;
+import com.recanto.recanto.enums.ReservationAuthorite;
 import com.recanto.recanto.repository.PersonRepository;
 import com.recanto.recanto.repository.ReservationRepository;
 import com.recanto.recanto.services.exceptions.ObjectNotFoundException;
@@ -37,7 +39,8 @@ public class ReservationService {
     public Reservation update(Integer id, @Valid ReservationDTO objDto) {
         objDto.setId(id);
         Reservation oldObj = findById(id);
-        return oldObj = newReservation(objDto);
+        oldObj = newReservation(objDto);
+        return repository.save(oldObj);
     }
 
     private Reservation newReservation(ReservationDTO objDto) {
@@ -53,6 +56,8 @@ public class ReservationService {
 
         reservation.setReserveDate(objDto.getReserveDate());
         reservation.setPerson(person.get());
+        reservation.setLocalReservation(LocalReservation.toEnum(objDto.getLocalReservation()));
+        reservation.setReservationAuthorite(ReservationAuthorite.toEnum(objDto.getReservationAuthorite()));
 
         return reservation;
     }

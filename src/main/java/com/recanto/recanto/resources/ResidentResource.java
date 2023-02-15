@@ -30,7 +30,7 @@ public class ResidentResource {
     @Autowired
     private ModelMapper mapper;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<ResidentDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.ok().body(new ResidentDTO(service.findById(id)));

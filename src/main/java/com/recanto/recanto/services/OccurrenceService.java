@@ -1,5 +1,6 @@
 package com.recanto.recanto.services;
 
+import com.recanto.recanto.domain.Employee;
 import com.recanto.recanto.domain.Occurrences;
 import com.recanto.recanto.domain.Person;
 import com.recanto.recanto.domain.dtos.OccurrencesDTO;
@@ -8,6 +9,7 @@ import com.recanto.recanto.repository.OccurrenceRepository;
 import com.recanto.recanto.repository.PersonRepository;
 import com.recanto.recanto.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -38,7 +40,8 @@ public class OccurrenceService {
     public Occurrences update(Integer id, @Valid OccurrencesDTO objDto) {
         objDto.setId(id);
         Occurrences oldObj = findById(id);
-        return oldObj = newOccurrences(objDto);
+         oldObj = newOccurrences(objDto);
+        return  repository.save(oldObj);
     }
 
     private Occurrences newOccurrences(OccurrencesDTO objDto) {
@@ -50,7 +53,7 @@ public class OccurrenceService {
         if (objDto.getId() != null) {
             occurrences.setId(objDto.getId());
         }
-        if(objDto.getSituation().equals(2)) {
+        if(objDto.getSituation().equals(1)) {
             occurrences.setFinishDate(LocalDate.now());
         }
 
@@ -60,6 +63,12 @@ public class OccurrenceService {
         occurrences.setPerson(person.get());
 
         return occurrences;
+    }
+
+
+    public void delete(Integer id) {
+        Occurrences obj = findById(id);
+        repository.deleteById(id);
     }
 
 
