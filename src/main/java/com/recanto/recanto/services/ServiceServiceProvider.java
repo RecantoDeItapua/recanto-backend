@@ -22,6 +22,7 @@ public class ServiceServiceProvider {
     @Autowired
     PersonRepository personRepository;
 
+
     public ServiceProvider findById(Integer id) {
         Optional<ServiceProvider> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object Not Found: " + id));
@@ -32,11 +33,11 @@ public class ServiceServiceProvider {
     }
 
     public ServiceProvider create(ServiceProviderDTO objDto) {
-
         return repository.save(newServiceProvider(objDto));
     }
 
     public ServiceProvider update(Integer id, @Valid ServiceProviderDTO objDto) {
+
         objDto.setId(id);
         ServiceProvider oldObj = findById(id);
         return oldObj = newServiceProvider(objDto);

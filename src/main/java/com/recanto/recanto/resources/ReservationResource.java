@@ -50,13 +50,13 @@ public class ReservationResource {
         return ResponseEntity.created(uri).build();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<ReservationDTO> update(@PathVariable Integer id, @RequestBody ReservationDTO objDto) {
         return ResponseEntity.ok().body(new ReservationDTO(service.update(id, objDto)));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<ReservationDTO> delete(@PathVariable Integer id) {
         service.delete(id);

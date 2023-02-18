@@ -53,7 +53,7 @@ public class ResidentResource {
 
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<ResidentDTO> update(@PathVariable Integer id, @Valid @RequestBody ResidentDTO objDto) {
        return ResponseEntity.ok().body( new ResidentDTO(service.update(id, objDto)));

@@ -48,15 +48,15 @@ public class OccurrenceResource {
                 .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<OccurrencesDTO> update(@PathVariable Integer id, @RequestBody OccurrencesDTO objDto) {
         return ResponseEntity.ok().body(new OccurrencesDTO(service.update(id, objDto)));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<OccurrencesDTO> update(@PathVariable Integer id) {
+    public ResponseEntity<OccurrencesDTO> delete(@PathVariable Integer id) {
         service.delete( id);
         return ResponseEntity.noContent().build();
     }
