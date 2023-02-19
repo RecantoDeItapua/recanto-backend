@@ -49,7 +49,7 @@ public class ServiceProviderResource {
                 .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE'")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<ServiceProviderDTO> update(@PathVariable Integer id, @RequestBody ServiceProviderDTO objDto) {
         return ResponseEntity.ok().body( new ServiceProviderDTO(service.update(id, objDto)));

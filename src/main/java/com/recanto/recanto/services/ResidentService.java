@@ -25,7 +25,7 @@ public class ResidentService {
 
     public Resident findById(Integer id) {
         Optional<Resident> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Obeject not found: " + id));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado: " + id));
     }
 
     public List<Resident> findAll() {
@@ -62,7 +62,7 @@ public class ResidentService {
                 obj.getOccurrences().size() > 0 ||
                 obj.getReservations().size() > 0
         ) {
-            throw new DataIntegrityViolationException("Resident cannot be deleted because there are schedule for him");
+            throw new DataIntegrityViolationException("Residente não pode ser deletado pois exitem serviços para ele");
         }
         repository.deleteById(id);
     }
@@ -70,11 +70,11 @@ public class ResidentService {
     private void validateByCpfAndEmail(ResidentDTO objDto) {
         Optional<Person> obj = personRepository.findByCpf(objDto.getCpf());
         if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
-            throw new DataIntegrityViolationException("Cpf Already Registered");
+            throw new DataIntegrityViolationException("Cpf já cadastrado");
         }
         obj = personRepository.findByEmail(objDto.getEmail());
         if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
-            throw new DataIntegrityViolationException("Email Already Registered");
+            throw new DataIntegrityViolationException("Email já cadastrado");
         }
     }
 
