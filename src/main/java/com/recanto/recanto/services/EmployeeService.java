@@ -38,7 +38,7 @@ public class EmployeeService {
 
         validateByCpfAndEmail(objDto);
         Employee newEmployee = new Employee(objDto);
-        newEmployee.setPassword(encoder.encode(objDto.getCpf()));
+        newEmployee.setPassword(encoder.encode(objDto.getPassword()));
         return repository.save(newEmployee);
     }
 
