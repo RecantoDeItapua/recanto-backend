@@ -19,10 +19,8 @@ public class ResidentDTO {
     protected Integer id;
     @NotNull(message= "name is riquered")
     protected String name;
-    @NotNull(message = "Cpf is riquered")
     @CPF
     protected String cpf;
-    @NotNull(message = "Email is riquered")
     protected String email;
     private String phoneNumber;
     private String adress;
