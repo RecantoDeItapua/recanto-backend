@@ -44,7 +44,7 @@ public class ResidentResource {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PostMapping
-    public ResponseEntity<ResidentDTO> create(@Valid @RequestBody ResidentDTO objDto) {
+    public ResponseEntity<ResidentDTO> create( @RequestBody ResidentDTO objDto) {
 
         Resident newObj = service.create(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();

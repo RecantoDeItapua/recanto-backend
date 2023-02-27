@@ -37,12 +37,11 @@ public abstract class Person {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
-
+    @Column(unique = false)
     protected String name;
-
-
+    @Column(unique = false)
     protected String cpf;
-
+    @Column(unique = false)
     protected String email;
 
 
