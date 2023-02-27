@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Setter
 public class ResidentDTO {
     protected Integer id;
-    @NotNull(message= "name is riquered")
     protected String name;
     protected String cpf;
     protected String email;
