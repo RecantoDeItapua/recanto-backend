@@ -41,11 +41,8 @@ public abstract class Person {
     protected String name;
 
 
-    @Column(unique = true)
     protected String cpf;
 
-
-    @Column(unique = true)
     protected String email;
 
 
