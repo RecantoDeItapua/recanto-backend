@@ -35,6 +35,7 @@ public class Payment {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate finishPayment;
     private Double cash;
+    private String obs;
 
     @ManyToOne
     @JoinColumn(name = "person_id")

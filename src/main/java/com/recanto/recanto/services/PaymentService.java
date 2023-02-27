@@ -63,6 +63,7 @@ public class PaymentService {
         payment.setSituation(Situation.toEnum(objDto.getSituation()));
         payment.setModePayment(ModePayment.toEnum(objDto.getModePayment()));
         payment.setPerson(person.get());
+        payment.setObs(objDto.getObs());
 
         return payment;
     }
