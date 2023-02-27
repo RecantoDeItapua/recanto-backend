@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class Resident extends Person {
 
     private String phoneNumber;
+    private String obs;
     private String adress;
 
     public Resident(Integer id, String name, String cpf, String email, String password) {
@@ -32,6 +33,7 @@ public class Resident extends Person {
         this.email = obj.getEmail();
         this.phoneNumber = obj.getPhoneNumber();
         this.adress = obj.getAdress();
+        this.obs = obj.getObs();
         this.password= obj.getPassword();
         this.profiles = obj.getProfiles().stream().map(Profile::getCode).collect(Collectors.toSet());
         this.dateCriation = obj.getDateCriation();
