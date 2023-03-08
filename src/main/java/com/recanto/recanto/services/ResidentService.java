@@ -35,7 +35,7 @@ public class ResidentService {
     public Resident create(ResidentDTO obj) {
         obj.setId(null);
         obj.setPassword(encoder.encode(obj.getEmail()));
-        //validateByCpfAndEmail(obj);
+        validateByCpfAndEmail(obj);
         Resident newResident = new Resident(obj);
         return repository.save(newResident);
     }
@@ -47,10 +47,10 @@ public class ResidentService {
         if(!objDto.getPassword().equals(oldObj.getPassword()))
             objDto.setPassword(encoder.encode(objDto.getPassword()));
 
-       // validateByCpfAndEmail(objDto);
+       validateByCpfAndEmail(objDto);
 
         oldObj = new Resident(objDto);
-        return repository.save(oldObj); 
+        return repository.save(oldObj);
 
     }
 

@@ -1,6 +1,7 @@
 package com.recanto.recanto.domain.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.recanto.recanto.domain.Adress;
 import com.recanto.recanto.domain.Resident;
 import com.recanto.recanto.enums.Profile;
 import lombok.Getter;
@@ -9,7 +10,9 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,7 +24,7 @@ public class ResidentDTO {
     protected String cpf;
     protected String email;
     private String phoneNumber;
-    private String adress;
+    private Double discount;
     protected String password;
     protected Set<Integer> profiles = new HashSet<>();
 
@@ -40,7 +43,7 @@ public class ResidentDTO {
         this.cpf = obj.getCpf();
         this.email = obj.getEmail();
         this.phoneNumber = obj.getPhoneNumber();
-        this.adress = obj.getAdress();
+        this.discount = obj.getDiscount();
         this.password = obj.getPassword();
         this.profiles = obj.getProfiles().stream().map(Profile::getCode).collect(Collectors.toSet());
         this.dateCriation = obj.getDateCriation();

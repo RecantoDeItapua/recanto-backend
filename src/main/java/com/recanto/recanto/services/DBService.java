@@ -1,11 +1,13 @@
 package com.recanto.recanto.services;
 
+import com.recanto.recanto.domain.Adress;
 import com.recanto.recanto.domain.Annoucements;
 import com.recanto.recanto.domain.Employee;
 import com.recanto.recanto.domain.Resident;
 import com.recanto.recanto.domain.ServiceProvider;
 import com.recanto.recanto.enums.Profile;
 import com.recanto.recanto.enums.Situation;
+import com.recanto.recanto.repository.AdressRepository;
 import com.recanto.recanto.repository.AnnoucementsRepository;
 import com.recanto.recanto.repository.EmployeeRepository;
 import com.recanto.recanto.repository.ResidentRepository;
@@ -29,6 +31,8 @@ public class DBService {
     @Autowired
     private AnnoucementsRepository annoucementsRepository;
     @Autowired
+    private AdressRepository adressRepository;
+    @Autowired
     private BCryptPasswordEncoder encoder;
 
 
@@ -38,6 +42,9 @@ public class DBService {
                 null, "Administrador","894.688.570-00", "recanto@email.com", encoder.encode("123"));
         r1.addProfiles(Profile.ADMIN);
 
+        Adress adress = new Adress(null, "endereço", r1);
+
         residentRepository.saveAll(Collections.singletonList(r1));
+        adressRepository.saveAll(Collections.singletonList(adress));
     }
 }

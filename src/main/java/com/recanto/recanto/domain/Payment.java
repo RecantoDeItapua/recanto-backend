@@ -36,6 +36,7 @@ public class Payment {
     private LocalDate finishPayment;
     private Double cash;
     private String obs;
+    private String adress;
 
     @ManyToOne
     @JoinColumn(name = "person_id")

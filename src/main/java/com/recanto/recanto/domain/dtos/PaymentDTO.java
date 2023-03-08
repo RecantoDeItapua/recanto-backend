@@ -28,6 +28,7 @@ public class PaymentDTO {
     private String personName;
     private Double cash;
     private String obs;
+    private String adress;
 
     public PaymentDTO(Payment obj) {
         this.id = obj.getId();
@@ -40,5 +41,6 @@ public class PaymentDTO {
         this.person = obj.getPerson().getId();
         this.personName = obj.getPerson().getName();
         this.obs = obj.getObs();
+        this.adress = obj.getAdress();
     }
 }

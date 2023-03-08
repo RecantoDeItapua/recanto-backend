@@ -1,6 +1,7 @@
 package com.recanto.recanto.domain.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.recanto.recanto.domain.Adress;
 import com.recanto.recanto.domain.Annoucements;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -16,24 +17,16 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @Getter
 @Setter
-public class AnnoucementsDTO {
+public class AdressDTO {
     private Integer id;
-    @NotNull(message = "O campo TITLE é requerido")
-    private String title;
-    @NotNull(message = "O campo DESCRIPTION é requerido")
-    private String description;
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dateOpen = LocalDate.now();
-    @NotNull(message = "O campo PERSON é requerido")
+    private String adress;
     private Integer person;
     private String personName;
 
 
-    public AnnoucementsDTO(Annoucements obj) {
+    public AdressDTO(Adress obj) {
         this.id = obj.getId();
-        this.title = obj.getTitle();
-        this.description = obj.getDescription();
-        this.dateOpen = obj.getOpenDate();
+        this.adress = obj.getAdress();
         this.person = obj.getPerson().getId();
         this.personName = obj.getPerson().getName();
     }

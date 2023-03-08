@@ -37,11 +37,15 @@ public abstract class Person {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
-    @Column(unique = false)
+
     protected String name;
-    @Column(unique = false)
+
+
+    @Column(unique = true)
     protected String cpf;
-    @Column(unique = false)
+
+
+    @Column(unique = true)
     protected String email;
 
 
@@ -74,6 +78,10 @@ public abstract class Person {
     @JsonIgnore
     @OneToMany(mappedBy = "person")
     private List<Reservation> payments = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "person")
+    private List<Adress> adress = new ArrayList<>();
 
     public Person() {
         super();
