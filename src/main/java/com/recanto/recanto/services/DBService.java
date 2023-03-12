@@ -45,5 +45,6 @@ public class DBService {
         r1.addProfiles(Profile.ADMIN);
 
         residentRepository.saveAll(Collections.singletonList(r1));
+        residentRepository.saveAll(Collections.singletonList(r2));
     }
 }
