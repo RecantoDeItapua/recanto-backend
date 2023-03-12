@@ -31,8 +31,6 @@ public class DBService {
     @Autowired
     private AnnoucementsRepository annoucementsRepository;
     @Autowired
-    private AdressRepository adressRepository;
-    @Autowired
     private BCryptPasswordEncoder encoder;
 
 
@@ -42,9 +40,10 @@ public class DBService {
                 null, "Administrador","894.688.570-00", "recanto@email.com", encoder.encode("123"));
         r1.addProfiles(Profile.ADMIN);
 
-        Adress adress = new Adress(null, "endereço", r1);
+        Resident r2 = new Resident(
+                null, "Administrador","894.688.570-11", "recanto@email.com", encoder.encode("123"));
+        r1.addProfiles(Profile.ADMIN);
 
         residentRepository.saveAll(Collections.singletonList(r1));
-        adressRepository.saveAll(Collections.singletonList(adress));
     }
 }
