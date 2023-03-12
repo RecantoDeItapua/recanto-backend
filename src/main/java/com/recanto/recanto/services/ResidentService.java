@@ -34,7 +34,7 @@ public class ResidentService {
 
     public Resident create(ResidentDTO obj) {
         obj.setId(null);
-        obj.setPassword(encoder.encode(obj.getEmail()));
+        obj.setPassword(encoder.encode("123"));
         validateByCpfAndEmail(obj);
         Resident newResident = new Resident(obj);
         return repository.save(newResident);
