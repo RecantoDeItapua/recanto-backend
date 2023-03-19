@@ -40,11 +40,8 @@ public class DBService {
                 null, "Administrador","894.688.570-00", "recanto@email.com", encoder.encode("123"));
         r1.addProfiles(Profile.ADMIN);
 
-        Resident r2 = new Resident(
-                null, "Administrador","894.688.570-11", "recanto2@email.com", encoder.encode("123"));
-        r1.addProfiles(Profile.ADMIN);
 
         residentRepository.saveAll(Collections.singletonList(r1));
-        residentRepository.saveAll(Collections.singletonList(r2));
+
     }
 }
