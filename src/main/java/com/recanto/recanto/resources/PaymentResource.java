@@ -50,7 +50,7 @@ public class PaymentResource {
         return ResponseEntity.created(uri).build();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<PaymentDTO> update(@PathVariable Integer id, @RequestBody PaymentDTO objDto) {
         return ResponseEntity.ok().body(new PaymentDTO(service.update(id, objDto)));
