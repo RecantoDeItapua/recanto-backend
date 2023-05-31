@@ -37,7 +37,7 @@ public class DBService {
 
     public void instenceDB() {
         Resident r1 = new Resident(
-                null, "Administrador","894.688.570-00", "recanto@email.com", encoder.encode("123"));
+                null, "Administrador","894.688.570-00", "recanto@gmail.com", encoder.encode("123"));
         r1.addProfiles(Profile.ADMIN);
 
 
