@@ -36,7 +36,7 @@ public class PaymentResource {
 
     @GetMapping
     public ResponseEntity<List<PaymentDTO>> findAll() {
-      return   ResponseEntity.ok().body(service.findAll()
+      return ResponseEntity.ok().body(service.findAll()
               .stream().map(PaymentDTO::new).collect(Collectors.toList()));
     }
 
