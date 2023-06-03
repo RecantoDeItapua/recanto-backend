@@ -36,11 +36,19 @@ public class PaymentDTO {
         this.cash = obj.getCash();
         this.datePayment = obj.getDatePayment();
         this.situation = obj.getSituation().getCode();
-        this.modePayment = obj.getModePayment().getCode();
         this.finishPayment = obj.getFinishPayment();
         this.person = obj.getPerson().getId();
         this.personName = obj.getPerson().getName();
         this.obs = obj.getObs();
         this.adress = obj.getAdress();
+    }
+
+    private Integer verifyCode(Payment obj) {
+        if (obj.getModePayment().getCode() == null) {
+           return  this.modePayment = 0;
+        }else {
+          return  this.modePayment = obj.getModePayment().getCode();
+        }
+
     }
 }
