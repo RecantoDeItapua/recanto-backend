@@ -33,11 +33,11 @@ public class PaymentResource {
        return ResponseEntity.ok().body(new PaymentDTO(service.findById(id)));
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE', 'ROLE_RESIDENT')")
     @GetMapping
     public ResponseEntity<List<PaymentDTO>> findAll() {
-      return   ResponseEntity.ok().body(service.findAll()
-              .stream().map(PaymentDTO::new).collect(Collectors.toList()));
+        List<Payment> list = service.findAll();
+        List<PaymentDTO> listDTO = list.stream().map(obj -> new PaymentDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')")
